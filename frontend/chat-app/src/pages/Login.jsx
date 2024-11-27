@@ -6,7 +6,6 @@ import axios from "axios"
 const Login = () => {
   const [personName, setPersonName] = useState('')
   const [personPassword, setPersonPassword] = useState('')
-  const [error, setError] = useState('');
   const navigate = useNavigate()
 
   const handleSummit = async (e) => {
@@ -19,7 +18,7 @@ const Login = () => {
     try {
       const { data } = await axios.post("http://localhost:5005/auth/login", dataDetails)
       console.log(data)
-      if (data.success) {
+      if (data.token) {
         localStorage.setItem("token", data.token);
         navigate("/home");
       } else {

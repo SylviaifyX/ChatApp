@@ -18,10 +18,10 @@ router.post("/register", async (req, res) => {
     if (userExists) {
       return res.status(400).json({ message: "Username already exists" });
     }
- 
+
     const user = await User.create({ username, password });
     const token = generateToken(user._id);
-  
+
     res.status(201).json({ success: true, token, username: user.username });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-
+    // console.log(user)
     const token = generateToken(user._id);
     res.status(200).json({ success: true, token, username: user.username });
   } catch (error) {
