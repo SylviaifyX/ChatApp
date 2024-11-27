@@ -18,10 +18,10 @@ router.post("/register", async (req, res) => {
     if (userExists) {
       return res.status(400).json({ message: "Username already exists" });
     }
-
+ 
     const user = await User.create({ username, password });
     const token = generateToken(user._id);
-
+  
     res.status(201).json({ success: true, token, username: user.username });
   } catch (error) {
     res.status(500).json({ message: error.message });

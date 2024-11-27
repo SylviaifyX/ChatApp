@@ -18,9 +18,8 @@ const Login = () => {
 
     try {
       const { data } = await axios.post("http://localhost:5005/auth/login", dataDetails)
-   
       console.log(data)
-      if (data.token) {
+      if (data.success) {
         localStorage.setItem("token", data.token);
         navigate("/home");
       } else {
@@ -29,7 +28,7 @@ const Login = () => {
       }
 
     } catch (error) {
-      console.log("there is an an loging in", error)
+      console.log("there is login in error", error)
     }
   }
   return (
