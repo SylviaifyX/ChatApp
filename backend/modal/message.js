@@ -1,22 +1,23 @@
-
 const mongoose = require("mongoose");
 
-const messageSchema = new mongoose.Schema(
-  {
-    sender: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
-      required: true,
+const MessageSchema = new mongoose.Schema({
+    conversationId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true, // Ensure this
+        ref: "Conversation",
     },
+    sender: { 
+        type: mongoose.Schema.Types.ObjectId,
+         required: true, 
+         ref: "User" },
     content: {
-      type: String,
-      required: true,
-      trim: true,
+        type: String,
+        required: true, // Ensure this field is required
     },
-  },
-  {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
-  }
-);
+    timestamp: {
+        type: Date,
+        default: Date.now,
+    },
+});
 
-module.exports = mongoose.model("Message", messageSchema);
+module.exports = mongoose.model("Message", MessageSchema);

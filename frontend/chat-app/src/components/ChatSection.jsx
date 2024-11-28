@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import statusImage from "../assets/person5.jpg";
+import statusImage from "../assets/person2.jpg";
 import Messages from "./Messages";
 import Search from "./Search";
 import InputBar from "./InputBar";
 
-const ChatSection = () => {
+const ChatSection = ({setMessage, sendMessage, messages,}) => {
   const [loggedInUser, setLoggedInUser] = useState({ name: "Cynthia", status: "Online" });
 
   useEffect(() => {
@@ -36,10 +36,10 @@ const ChatSection = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto bg-gray-100">
-        <Messages />
+        <Messages messages={messages} />
       </div>
 
-      <InputBar />
+      <InputBar sendMessage={sendMessage} setMessage={setMessage}/>
     </div>
   );
 };

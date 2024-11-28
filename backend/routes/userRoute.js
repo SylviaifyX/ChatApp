@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const User = require("../modal/userModel");
+const User = require("../modal/UserModel");
 const jwt = require("jsonwebtoken");
 const protect = require("../utils/protect");
 
@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    // console.log(user)
+
     const token = generateToken(user._id);
     res.status(200).json({ success: true, token, username: user.username });
   } catch (error) {
