@@ -14,24 +14,32 @@ const SignUp = () => {
   const navigate = useNavigate()
 
   const handleSignUp = async (e) => {
-    e.preventDefault()
-    // console.log("sign email", email , "password", personPassword, "personname", personName)
+    e.preventDefault();
+  
     try {
-      const response = await axios.post("http://localhost:5005/auth/register", 
-        { username: personName,  password: personPassword })
-      setSuccessMessage("resgistration successful")
-      console.log("Response", response)
-      setPersonName("");
-      setPersonPassword("");
-
-      navigate("/login")
+      const { data } = await axios.post("http://localhost:5005/auth/register", {
+        username: personName,
+        password: personPassword,
+      });
+  
+      if (data.token) {
+        // Store the token and user details in localStorage
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("user", JSON.stringify({ username: data.username }));
+  
+        // Redirect to home page
+        navigate("/");
+      } else {
+        alert("Registration successful, but no token received. Please log in.");
+        navigate("/login");
+      }
     } catch (error) {
       setErrorMessage(
         error.response?.data?.message || "An error occurred during registration."
       );
     }
   };
-
   return (
     <div className="w-full h-screen bg-green-50 flex flex-col items-center justify-center p-3">
       <div className="w-full max-w-[500px] flex flex-col mx-auto  gap-3 font-font text-[18px]">

@@ -22,7 +22,7 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("user", JSON.stringify({ username: data.username }));
-        navigate("/home");
+        navigate("/");
       } else {
         navigate("/signup")
         alert("You are not registered to this service")
