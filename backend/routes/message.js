@@ -1,7 +1,5 @@
 const express = require("express");
-
 const router = express.Router();
-
 const Message = require("../modal/message");
 const protect = require("../utils/protect");
 
@@ -73,6 +71,17 @@ router.get("/", async (req, res) => {
 router.get("/sender/:userId", async (req, res) => {
     try {
         const messages = await Message.find({ sender: req.params.userId });
+        res.status(200).json(messages);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Get messages by conversationId
+router.get("/conversation/:conversationId", protect, async (req, res) => {
+    try {
+        const messages = await Message.find({ conversationId: req.params.conversationId })
+            .populate("sender", "username");
         res.status(200).json(messages);
     } catch (err) {
         res.status(500).json(err);

@@ -25,6 +25,7 @@ connectDB();
 
 app.use("/messages", router);
 app.use("/auth", userrouter);
+// app.use("/users", userrouter)
 
 // Socket.IO Logic
 io.on("connection", (socket) => {
