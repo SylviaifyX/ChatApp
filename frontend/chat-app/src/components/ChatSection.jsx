@@ -18,7 +18,7 @@ const ChatSection = ({setMessage, sendMessage, messages,}) => {
     <div className="w-full h-screen lg:w-[80%] flex flex-col md:flex-col">
       {/* Header Section */}
       <div className="shadow border-b-2 p-2">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-2 lg:h-[50px]">
+        <div className="flex  items-center justify-between gap-2 lg:h-[50px]">
           {/* Profile Section */}
           <div className="flex items-end gap-2">
             <img

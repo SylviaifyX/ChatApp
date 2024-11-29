@@ -86,9 +86,9 @@ const Home = () => {
   const [message, setMessage] = useState("");
   const [username, setUsername] = useState("");
 
-  const [currentConversationId, setCurrentConversationId] = useState(null); // Added state for conversation ID
+  const [currentConversationId, setCurrentConversationId] = useState(null); 
 
-  // Fetch username from localStorage
+
   useEffect(() => {
     const storedUsername = localStorage.getItem("user");
     if (storedUsername) {
@@ -96,9 +96,9 @@ const Home = () => {
     } else {
       console.error("No username found in localStorage");
     }
-  }, []); // Empty array to fetch on mount
+  }, []); 
 
-  // Listen for messages from the server
+  
   useEffect(() => {
     const handleMessage = (data) => {
       setMessages((prevMessages) => [...prevMessages, data]);
@@ -109,14 +109,13 @@ const Home = () => {
     return () => {
       socket.off("receiveMessage", handleMessage);
     };
-  }, []); // Empty array to listen for messages on mount
+  }, []); 
 
-  // Fetch initial messages from the backend
+ 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5005/messages"); // Adjust API endpoint if necessary
-        setMessages(data);
+        const { data } = await axios.get("http://localhost:5005/messages"); 
       } catch (error) {
         console.error("Error fetching messages:", error);
       }
@@ -130,15 +129,14 @@ const Home = () => {
     if (!message.trim()) return;
 
     const newMessage = {
-      conversationId: currentConversationId, // Use state for conversation ID
+      conversationId: currentConversationId, 
       content: message.trim(),
-      sender: username, // Ensure username is available
+      sender: username, 
     };
 
-    // Emit the message to the server
     socket.emit("sendMessage", newMessage);
 
-    // Optimistically update the UI
+   
     setMessages((prevMessages) => [
       ...prevMessages,
       { ...newMessage, isOptimistic: true },
@@ -153,6 +151,7 @@ const Home = () => {
         sendMessage={sendMessage}
         setMessage={setMessage}
         messages={messages}
+        message ={message}
       />
     </div>
   );

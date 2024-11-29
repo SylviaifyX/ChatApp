@@ -1,9 +1,9 @@
-
+import icon from '../assets/chatapp.png'
 
 const Search = () =>{
     return(
-       <div className="w-full md:w-[40%] lg:w-10/12">
-            <input type="text" placeholder="search for person"  className="w-full p-2 rounded-md outline-none border border-green-700"/>
+       <div className="">
+            <img src={icon} alt='icon-px'className='w-[90px] h-[90px] '></img>
        </div>
     )
 }

@@ -23,12 +23,12 @@ const SignUp = () => {
       });
   
       if (data.token) {
-        // Store the token and user details in localStorage
+       
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("user", JSON.stringify({ username: data.username }));
   
-        // Redirect to home page
+       
         navigate("/");
       } else {
         alert("Registration successful, but no token received. Please log in.");
